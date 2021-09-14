@@ -125,19 +125,30 @@ Exporta los datos del jugador a un archivo txt en la ruta especificada (/home/dr
 archivo: informacionDelJugador.txt.
 """
 def exportarInformacionJugador():
+    index = respuesta_usuario.upper()
+    letraValor = {
+        "A": 0,
+        "B": 1,
+        "C": 2,
+        "D": 3
+    }
     informacionJugador = {
         "Nombre Del Jugador" : nombre_jugador,
         "Ultima pregunta contestada": preguntas[numero]["pregunta"],
-        "Respuesta del Jugador" : respuesta_usuario.upper(),
-        "Respuesta Correcta" : preguntas[numero]["respuesta"],
+        "Respuesta del Jugador" : index,
+        "Respuesta Correcta" : opciones[numero][letraValor.get(index)],
         "Nivel Jugador": nivel + 1,
         "Premio Acumulado": f"${acumulado:,} millones"
     }
-    ruta = '/home/draconis/Documentos/PYTHON PROJECT/RETO TECNICO/informacionDelJugador.txt'
-    archivo = open(r'ruta', "w")
+    #ruta = "/home/draconis/Documentos/PYTHON PROJECT/RETO TECNICO/informacionDelJugador.txt"
+    ruta = "/home/draconis/Documentos/PYTHON PROJECT/RETO TECNICO/"
+    archivo = open(r'informacionDelJugador.txt', "w")
     archivo.write(str(informacionJugador))
     print(f"\tExportando archivo con los datos del jugador a la siguiente ruta:\n {ruta}")
     time.sleep(3)
+
+
+
 
 
 nivel = 0
