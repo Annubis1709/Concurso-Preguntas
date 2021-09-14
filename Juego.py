@@ -140,8 +140,9 @@ def exportarInformacionJugador():
         "Nivel Jugador": nivel + 1,
         "Premio Acumulado": f"${acumulado:,} millones"
     }
-    #ruta = "/home/draconis/Documentos/PYTHON PROJECT/RETO TECNICO/informacionDelJugador.txt"
-    ruta = "/home/draconis/Documentos/PYTHON PROJECT/RETO TECNICO/"
+
+    ruta = '/home/draconis/Documentos/PYTHON PROJECT/RETO TECNICO/'
+    #Cambiar a la ruta a la cual desea guardar el archivo
     archivo = open(r'informacionDelJugador.txt', "w")
     archivo.write(str(informacionJugador))
     print(f"\tExportando archivo con los datos del jugador a la siguiente ruta:\n {ruta}")
