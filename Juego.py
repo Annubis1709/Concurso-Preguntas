@@ -1,6 +1,5 @@
 import random
 import time
-
 from preguntasRespuestas import preguntas, opciones
 
 def mensajeBienvenida():
@@ -40,7 +39,7 @@ def preguntasPorNivel(numero):
     print(preguntas[numero]["pregunta"])
     for x in opciones[numero - 1]:
         print(x)
-    return True
+
 
 """
 Verifica si la respuesta del jugador coincide con la respuesta correcta almacenada en el diccionario de preguntas,
@@ -96,17 +95,17 @@ Informa al jugador cuanto ha ganado y lleva de acumulado por cada nivel del jueg
 continuar con el juego
 """
 
-def mensaje():
+def mensaje(nombre_jugador):
     if nivel >= 0 and nivel <= 3:
         print("\t", "*" * 100)
-        print(f"\t¡Felicidades! pasaste el nivel: {nivel + 1}. ¡Has ganado ${premiosPorNivel(nivel):,} millones de pesos!".center(100))
+        print(f"\t¡Felicidades {nombre_jugador}! pasaste el nivel: {nivel + 1}. ¡Has ganado ${premiosPorNivel(nivel):,} millones de pesos!".center(100))
         print("\t", "*" * 100)
         print(f"\tTienes un acumulado de: ${acumulado:,}. ¿Deseas continuar al siguiente nivel ({nivel + 2}) y "
               f"ganar el premio de: ${premiosPorNivel(nivel + 1):,}?")
         verificarOpcionJugador()
     else:
         print("\t", "*" * 100)
-        print(f"\t¡Felicidades, has ganado el premio mayor: ${acumulado:,}!".center(100))
+        print(f"\t¡Felicidades {nombre_jugador}, has ganado el premio mayor: ${acumulado:,}!".center(100))
         print("\t", "*" * 100)
         exportarInformacionJugador()
         exit()
@@ -127,6 +126,7 @@ archivo: informacionDelJugador.txt.
 """
 def exportarInformacionJugador():
     informacionJugador = {
+        "Nombre Del Jugador" : nombre_jugador,
         "Ultima pregunta contestada": preguntas[numero]["pregunta"],
         "Respuesta del Jugador" : respuesta_usuario.upper(),
         "Respuesta Correcta" : preguntas[numero]["respuesta"],
@@ -144,15 +144,16 @@ nivel = 0
 acumulado = 0
 ronda = 5
 mensajeBienvenida()
+nombre_jugador = input("\tEscriba su su nombre: ")
 while ronda > 0:
     numero = numeroAleatorio(nivel)
     preguntasPorNivel(numero)
     respuesta_usuario = input("Ingrese la respuesta: ")
     if verificarRespuesta(numero):
         acumulado += premiosPorNivel(nivel)
-        mensaje()
+        mensaje(nombre_jugador)
         ronda -= 1
         nivel += 1
     else:
-        print("Respuesta incorrecta :( , el juego ha finalizado")
+        print(f"Respuesta incorrecta {nombre_jugador} :( , el juego ha finalizado")
         break
